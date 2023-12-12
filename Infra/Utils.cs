@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Infra
 {
@@ -29,6 +31,38 @@ namespace Infra
             {
                 throw;
             }
+        }
+
+        public static string GetRootConfiguration(string key)
+        {
+            try
+            {
+                return _root?.GetSection($"{key}")?.Value!;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static bool VerifyHash(string input, string hash)
+        {
+            string hash2 = GetHash(input);
+            return StringComparer.OrdinalIgnoreCase.Compare(hash2, hash) == 0;
+        }
+
+        public static string GetHash(string input)
+        {
+            var array = SHA256.HashData(Encoding.UTF8.GetBytes(input));
+
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                stringBuilder.Append(array[i].ToString("x2"));
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

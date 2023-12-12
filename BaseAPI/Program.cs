@@ -20,6 +20,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 #region Business
 
+builder.Services.AddScoped<ILoginBusiness, LoginBusiness>();
 builder.Services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
 
 #endregion
@@ -30,7 +31,7 @@ builder.Services.AddMemoryCache();
 
 Swagger.RegisterServices(builder.Services);
 
-//Jwt.RegisterServices(builder.Services);
+JwtServices.RegisterServices(builder.Services);
 
 var app = builder.Build();
 

@@ -3,6 +3,7 @@ using Business.Model;
 using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
+using Infra;
 
 namespace Business
 {
@@ -124,26 +125,33 @@ namespace Business
 
         #region Map
 
-        private UsuarioModelView Map(Usuario usuario)
+        private static UsuarioModelView Map(Usuario usuario)
         {
             return new UsuarioModelView
             {
                 Id = usuario.IdUsuario, 
-                Nome = usuario.Nome
+                Nome = usuario.Nome,
+                Documento = usuario.Documento,
+                Email = usuario.Email
             };
         }
 
-        private Usuario Map(UsuarioModelView usuario)
+        private static Usuario Map(UsuarioModelView usuarioModelView)
         {
             return new Usuario
             {
-                Nome = usuario.Nome
+                Nome = usuarioModelView.Nome,
+                Documento = usuarioModelView.Documento,
+                Senha = Utils.GetHash(usuarioModelView.Senha!),
+                Email = usuarioModelView.Email
             };
         }
 
-        private void Map(ref Usuario usuario, UsuarioModelView usuarioModelView)
+        private static void Map(ref Usuario usuario, UsuarioModelView usuarioModelView)
         {
-            usuario.Nome = usuario.Nome != usuarioModelView.Nome ? usuarioModelView.Nome : usuario.Nome;
+            usuario.Nome = usuario.Nome! != usuarioModelView.Nome! ? usuarioModelView.Nome! : usuario.Nome!;
+            usuario.Senha = usuario.Senha! != Utils.GetHash(usuarioModelView.Senha!) ? Utils.GetHash(usuarioModelView.Senha!) : usuario.Senha!;
+            usuario.Email = usuario.Email! != usuarioModelView.Email! ? usuarioModelView.Email! : usuario.Email!;
         }
 
         #endregion

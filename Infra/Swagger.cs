@@ -48,6 +48,17 @@ namespace Infra
                     Extensions = logo
                 });
 
+                c.SwaggerDoc("Login", new OpenApiInfo
+                {
+                    Contact = contact,
+                    Description = "Login",
+                    License = licence,
+                    TermsOfService = new Uri("https://www.google.com"),
+                    Title = "Login",
+                    Version = "V1",
+                    Extensions = logo
+                });
+
                 c.SwaggerDoc("Usuario", new OpenApiInfo
                 {
                     Contact = contact,
@@ -101,6 +112,7 @@ namespace Infra
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("none/swagger.json", "none");
+                c.SwaggerEndpoint("Login/swagger.json", "Login");
                 c.SwaggerEndpoint("Usuario/swagger.json", "Usuario");
 
                 c.InjectStylesheet("custom.css");

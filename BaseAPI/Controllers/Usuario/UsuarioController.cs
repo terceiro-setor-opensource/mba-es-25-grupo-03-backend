@@ -1,5 +1,6 @@
 ﻿using Business.Model;
 using Business.Model.ModelView;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers
@@ -7,6 +8,7 @@ namespace BaseAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Usuario")]
+    [Authorize("Bearer")]
     public class UsuarioController : ApiController
     {
         private readonly IUsuarioBusiness _usuarioBusiness;
