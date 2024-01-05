@@ -1,15 +1,12 @@
 ﻿using Business.Core;
 using Business.Model;
-using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
 using Infra;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
 
 namespace Business
 {
@@ -58,10 +55,10 @@ namespace Business
 
         private LoginResponseModelView GenerateToken(Usuario usuario)
         {
-            var identity = new ClaimsIdentity(new GenericIdentity(usuario.IdUsuario.ToString(), "Login"));
+            var identity = new ClaimsIdentity(new GenericIdentity(usuario.Id.ToString(), "Login"));
 
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")));
-            identity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, usuario.IdUsuario.ToString()));
+            identity.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, usuario.Id.ToString()));
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email, usuario.Email));
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.GivenName, usuario.Nome));
 

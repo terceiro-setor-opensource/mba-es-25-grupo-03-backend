@@ -1,6 +1,5 @@
-﻿using Business;
-using Business.Model;
-using Business.Model.ModelView;
+﻿using Business.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers.Login
@@ -8,6 +7,7 @@ namespace BaseAPI.Controllers.Login
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Login")]
+    [AllowAnonymous]
     public class LoginController : ApiController
     {
         private readonly ILoginBusiness _loginBusiness;

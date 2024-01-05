@@ -41,7 +41,7 @@ namespace Business
         {
             try
             {
-                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.IdUsuario == id);
+                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.Id == id);
 
                 if (usuario == null)
                 {
@@ -79,7 +79,7 @@ namespace Business
         {
             try
             {
-                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.IdUsuario == id);
+                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.Id == id);
 
                 if (usuario == null)
                 {
@@ -104,7 +104,7 @@ namespace Business
         {
             try
             {
-                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.IdUsuario == id);
+                var usuario = await _usuarioRepository.GetAsNoTrackingAsync(x => x.Id == id);
 
                 if (usuario == null)
                 {
@@ -129,7 +129,7 @@ namespace Business
         {
             return new UsuarioModelView
             {
-                Id = usuario.IdUsuario, 
+                Id = usuario.Id, 
                 Nome = usuario.Nome,
                 Documento = usuario.Documento,
                 Email = usuario.Email

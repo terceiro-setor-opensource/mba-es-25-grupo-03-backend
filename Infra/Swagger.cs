@@ -22,7 +22,7 @@ namespace Infra
                 },
             };
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
                 OpenApiContact contact = new OpenApiContact
                 {
@@ -37,7 +37,7 @@ namespace Infra
                     Name = "",
                 };
 
-                c.SwaggerDoc("none", new OpenApiInfo
+                options.SwaggerDoc("none", new OpenApiInfo
                 {
                     Contact = contact,
                     Description = "",
@@ -48,7 +48,7 @@ namespace Infra
                     Extensions = logo
                 });
 
-                c.SwaggerDoc("Login", new OpenApiInfo
+                options.SwaggerDoc("Login", new OpenApiInfo
                 {
                     Contact = contact,
                     Description = "Login",
@@ -59,7 +59,18 @@ namespace Infra
                     Extensions = logo
                 });
 
-                c.SwaggerDoc("Usuario", new OpenApiInfo
+                options.SwaggerDoc("Curso", new OpenApiInfo
+                {
+                    Contact = contact,
+                    Description = "Curso",
+                    License = licence,
+                    TermsOfService = new Uri("https://www.google.com"),
+                    Title = "Curso",
+                    Version = "V1",
+                    Extensions = logo
+                });
+
+                options.SwaggerDoc("Usuario", new OpenApiInfo
                 {
                     Contact = contact,
                     Description = "Usuario",
@@ -70,7 +81,7 @@ namespace Infra
                     Extensions = logo
                 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.ApiKey,
                     In = ParameterLocation.Header,
@@ -79,7 +90,7 @@ namespace Infra
                     Scheme = "Bearer"
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -99,7 +110,7 @@ namespace Infra
 
                 // Set the comments path for the Swagger JSON and UI.
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, "BaseApi.xml");
-                c.IncludeXmlComments(xmlPath);
+                options.IncludeXmlComments(xmlPath);
             });
 
             #endregion Swagger
@@ -113,6 +124,7 @@ namespace Infra
             {
                 c.SwaggerEndpoint("none/swagger.json", "none");
                 c.SwaggerEndpoint("Login/swagger.json", "Login");
+                c.SwaggerEndpoint("Curso/swagger.json", "Curso");
                 c.SwaggerEndpoint("Usuario/swagger.json", "Usuario");
 
                 c.InjectStylesheet("custom.css");

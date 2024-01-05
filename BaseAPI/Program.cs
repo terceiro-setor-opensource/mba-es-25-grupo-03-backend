@@ -14,14 +14,39 @@ builder.Services.AddSwaggerGen();
 
 #region Repository
 
+#region Usuário
+
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+#endregion
+
+#region Curso
+
+builder.Services.AddScoped<ICursoRepository, CursoRepository>();
+builder.Services.AddScoped<ICategoriaCursoRepository, CategoriaCursoRepository>();
+builder.Services.AddScoped<IConteudoCursoRepository, ConteudoCursoRepository>();
+
+#endregion
 
 #endregion
 
 #region Business
 
 builder.Services.AddScoped<ILoginBusiness, LoginBusiness>();
+
+#region Usuário
+
 builder.Services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
+
+#endregion
+
+#region Curso
+
+builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
+builder.Services.AddScoped<ICategoriaCursoBusiness, CategoriaCursoBusiness>();
+builder.Services.AddScoped<IConteudoCursoBusiness, ConteudoCursoBusiness>();
+
+#endregion
 
 #endregion
 

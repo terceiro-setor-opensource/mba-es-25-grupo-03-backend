@@ -17,7 +17,21 @@ namespace Data.Core
 
         #region DbSets
 
+        #region Usuário
+
         public DbSet<Usuario> Usuario { get; set; }
+
+        #endregion
+
+        #region Curso
+
+        public DbSet<Curso> Curso { get; set; }
+
+        public DbSet<CategoriaCurso> CategoriaCurso { get; set; }
+
+        public DbSet<ConteudoCurso> ConteudoCurso { get; set; }
+
+        #endregion
 
         #endregion
     }
