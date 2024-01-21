@@ -31,6 +31,16 @@ namespace Data.Core
 
         public DbSet<ConteudoCurso> ConteudoCurso { get; set; }
 
+        public DbSet<MatriculaCurso> MatriculaCurso { get; set; }
+
+        #endregion
+
+        #region Mensagem
+
+        public DbSet<MensagemCurso> MensagemCurso { get; set; }
+
+        public DbSet<MensagemMatricula> MensagemMatricula { get; set; }
+
         #endregion
 
         #endregion

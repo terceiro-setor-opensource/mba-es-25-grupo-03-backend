@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Curso")]
@@ -13,11 +16,19 @@ namespace BaseAPI.Controllers
     {
         private readonly IConteudoCursoBusiness _conteudoCursoBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="conteudoCursoBusiness"></param>
         public ConteudoCursoController(IConteudoCursoBusiness conteudoCursoBusiness)
         {
             _conteudoCursoBusiness = conteudoCursoBusiness;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<ConteudoCursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -34,6 +45,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(ConteudoCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -50,6 +66,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="conteudoCurso"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(ConteudoCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -68,6 +89,12 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="conteudoCurso"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType(200, Type = typeof(ConteudoCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -86,6 +113,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(200, Type = typeof(ConteudoCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers.Login
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Login")]
@@ -12,11 +15,20 @@ namespace BaseAPI.Controllers.Login
     {
         private readonly ILoginBusiness _loginBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginBusiness"></param>
         public LoginController(ILoginBusiness loginBusiness)
         {
             _loginBusiness = loginBusiness;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(LoginResponseModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]

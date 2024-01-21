@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Curso")]
@@ -13,11 +16,19 @@ namespace BaseAPI.Controllers
     {
         private readonly ICategoriaCursoBusiness _categoriaCursoBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoriaCursoBusiness"></param>
         public CategoriaCursoController(ICategoriaCursoBusiness categoriaCursoBusiness)
         {
             _categoriaCursoBusiness = categoriaCursoBusiness;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<CategoriaCursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -34,6 +45,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -50,6 +66,12 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="descricao"></param>
+        /// <param name="avatar"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -68,6 +90,13 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="descricao"></param>
+        /// <param name="avatar"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -86,6 +115,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]

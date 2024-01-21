@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Curso")]
@@ -13,6 +16,10 @@ namespace BaseAPI.Controllers
     {
         private readonly ICursoBusiness _cursoBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cursoBusiness"></param>
         public CursoController(ICursoBusiness cursoBusiness)
         {
             _cursoBusiness = cursoBusiness;

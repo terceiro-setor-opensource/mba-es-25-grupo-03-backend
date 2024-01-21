@@ -5,7 +5,6 @@ using Data.Repository;
 using Data.Repository.Model;
 using Infra;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +26,14 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<ICategoriaCursoRepository, CategoriaCursoRepository>();
 builder.Services.AddScoped<IConteudoCursoRepository, ConteudoCursoRepository>();
+builder.Services.AddScoped<IMatriculaCursoRepository, MatriculaCursoRepository>();
+
+#endregion
+
+#region Mensagem
+
+builder.Services.AddScoped<IMensagemCursoRepository, MensagemCursoRepository>();
+builder.Services.AddScoped<IMensagemMatriculaRepository, MensagemMatriculaRepository>();
 
 #endregion
 
@@ -47,6 +54,12 @@ builder.Services.AddScoped<IUsuarioBusiness, UsuarioBusiness>();
 builder.Services.AddScoped<ICursoBusiness, CursoBusiness>();
 builder.Services.AddScoped<ICategoriaCursoBusiness, CategoriaCursoBusiness>();
 builder.Services.AddScoped<IConteudoCursoBusiness, ConteudoCursoBusiness>();
+
+#endregion
+
+#region Mensagem
+
+builder.Services.AddScoped<IMensagemBusiness, MensagemBusiness>();
 
 #endregion
 

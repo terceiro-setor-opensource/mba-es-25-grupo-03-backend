@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseAPI.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Usuario")]
@@ -13,11 +16,19 @@ namespace BaseAPI.Controllers
     {
         private readonly IUsuarioBusiness _usuarioBusiness;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="usuarioBusiness"></param>
         public UsuarioController(IUsuarioBusiness usuarioBusiness)
         {
             _usuarioBusiness = usuarioBusiness;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<UsuarioModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -34,6 +45,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(UsuarioModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -50,6 +66,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(UsuarioModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -68,6 +89,12 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType(200, Type = typeof(UsuarioModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -86,6 +113,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(200, Type = typeof(UsuarioModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
