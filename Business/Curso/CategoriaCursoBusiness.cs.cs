@@ -3,6 +3,8 @@ using Business.Model;
 using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
+using Infra;
+using Microsoft.AspNetCore.Http;
 
 namespace Business
 {
@@ -57,11 +59,11 @@ namespace Business
             }
         }
 
-        public async Task Post(CategoriaCursoModelView categoriaCursoModelView)
+        public async Task Post(string descricao, IFormFile avatar)
         {
             try
             {
-                var categoriaCurso = Map(categoriaCursoModelView);
+                var categoriaCurso = Map(descricao, await Utils.ConvertIFormFileToByteArray(avatar));
 
                 _categoriaCursoRepository.Add(categoriaCurso);
 
@@ -74,7 +76,7 @@ namespace Business
             }
         }
 
-        public async Task Put(int id, CategoriaCursoModelView categoriaCursoModelView)
+        public async Task Put(int id, string descricao, IFormFile avatar)
         {
             try
             {
@@ -86,7 +88,7 @@ namespace Business
                     return;
                 }
 
-                Map(ref categoriaCurso, categoriaCursoModelView);
+                Map(ref categoriaCurso, descricao, await Utils.ConvertIFormFileToByteArray(avatar));
 
                 _categoriaCursoRepository.Update(categoriaCurso);
 
@@ -128,21 +130,24 @@ namespace Business
         {
             return new CategoriaCursoModelView
             {
-                Id = categoriaCurso.Id
+                Id = categoriaCurso.Id, 
+                Descricao = categoriaCurso.Nome
             };
         }
 
-        private static CategoriaCurso Map(CategoriaCursoModelView categoriaCursoModelView)
+        private static CategoriaCurso Map(string descricao, byte[] avatar)
         {
             return new CategoriaCurso
             {
-
+                Nome = descricao,
+                Avatar = avatar
             };
         }
 
-        private static void Map(ref CategoriaCurso curso, CategoriaCursoModelView categoriaCursoModelView)
+        private static void Map(ref CategoriaCurso curso, string descricao, byte[] avatar)
         {
-            
+            curso.Nome = curso.Nome != descricao ? descricao : curso.Nome;
+            curso.Avatar = curso.Avatar != avatar ? avatar : curso.Avatar;
         }
 
         #endregion

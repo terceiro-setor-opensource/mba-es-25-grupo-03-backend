@@ -9,7 +9,7 @@ namespace Data.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID_CURSO")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MaxLength(256)]
@@ -37,5 +37,20 @@ namespace Data.Entity
 
         [Column("IMG_AVATAR")]
         public byte[]? Avatar { get; set; }
+
+        [Column("NU_CLASSIFICACAO")]
+        public double Classificacao { get; set; }
+
+        [Column("DT_CRIACAO")]
+        public DateTime DataCriacao { get; set; }
+
+
+        [ForeignKey("IdUsuario")]
+        public virtual Usuario Usuario { get; set; } = new Usuario();
+
+        [ForeignKey("IdCategoriaCurso")]
+        public virtual CategoriaCurso CategoriaCurso { get; set; } = new CategoriaCurso();
+
+        public virtual ICollection<ConteudoCurso>? ConteudoCurso { get; set; }
     }
 }

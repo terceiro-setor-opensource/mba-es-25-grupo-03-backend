@@ -9,7 +9,11 @@ namespace Data.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID_CONTEUDO_CURSO")]
-        public int Id { get; set; }
+        public long Id { get; set; }
+
+        [Required]
+        [Column("ID_CURSO")]
+        public long IdCurso { get; set; }
 
         [Required]
         [MaxLength(256)]
@@ -21,8 +25,8 @@ namespace Data.Entity
         public int NumeroOrdem { get; set; }
 
         [Required]
-        [Column("ID_CURSO")]
-        public long IdCurso { get; set; }
+        [Column("NU_MINUTOS")]
+        public short MinutosDuracao { get; set; }
 
         [MaxLength(1000)]
         [Column("DS_INFO_CONTEUDO_CURSO")]
@@ -30,15 +34,16 @@ namespace Data.Entity
 
         [Required]
         [Column("DS_URL_VIDEO")]
-        public int UrlVideo { get; set; }
+        public string UrlVideo { get; set; }
 
         [Column("ID_PRE_REQUISITO")]
-        public int? IdPreRequisito { get; set; }
+        public long? IdPreRequisito { get; set; }
 
         [Column("IN_PRE_REQUISITO_OBG")]
         public short PreRequisitoObrigatorio { get; set; }
 
-        [Column("IMG_AVATAR")]
-        public byte[]? Avatar { get; set; }
+
+        [ForeignKey("IdCurso")]
+        public virtual Curso Curso { get; set; } = new Curso();
     }
 }

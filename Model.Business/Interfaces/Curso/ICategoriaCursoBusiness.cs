@@ -1,4 +1,5 @@
 ﻿using Business.Model.ModelView;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Model
 {
@@ -8,9 +9,9 @@ namespace Business.Model
 
         Task<CategoriaCursoModelView?> Get(int id);
 
-        Task Post(CategoriaCursoModelView model);
+        Task Post(string descricao, IFormFile avatar);
 
-        Task Put(int id, CategoriaCursoModelView model);
+        Task Put(int id, string descricao, IFormFile avatar);
 
         Task Delete(int id);
     }

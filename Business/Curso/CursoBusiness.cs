@@ -3,7 +3,6 @@ using Business.Model;
 using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
-using Infra;
 
 namespace Business
 {
@@ -16,19 +15,19 @@ namespace Business
             _cursoRepository = cursoRepository;
         }
 
-        public async Task<List<CursoModelView>?> List()
+        public async Task<List<CursoModelView>?> List(string? descricao, long categoria = 0, int classificacao = 0, int duracaoMin = 0, int duracaoMax = 0)
         {
             try
             {
-                var listaCurso = await _cursoRepository.ListAsNoTrackingAsync();
+                var listaCursos = await _cursoRepository.ListaCursos(descricao, categoria, classificacao, duracaoMin, duracaoMax);
 
-                if (listaCurso == null)
+                if (listaCursos == null)
                 {
                     Mensagem = "Cursos não encontrados";
                     return await Task.FromResult<List<CursoModelView>?>(null);
                 }
 
-                return listaCurso.Select(Map).ToList();
+                return listaCursos.Select(Map).ToList();
             }
             catch
             {
@@ -41,15 +40,15 @@ namespace Business
         {
             try
             {
-                var Curso = await _cursoRepository.GetAsNoTrackingAsync(x => x.Id == id);
+                var curso = await _cursoRepository.GetCurso(id);
 
-                if (Curso == null)
+                if (curso == null)
                 {
                     Mensagem = "Curso não encontrado";
                     return await Task.FromResult<CursoModelView?>(null);
                 }
 
-                return Map(Curso);
+                return Map(curso);
             }
             catch
             {
@@ -58,13 +57,13 @@ namespace Business
             }
         }
 
-        public async Task Post(CursoModelView CursoModelView)
+        public async Task Post(CursoModelView cursoModelView)
         {
             try
             {
-                var Curso = Map(CursoModelView);
+                var curso = Map(cursoModelView);
 
-                _cursoRepository.Add(Curso);
+                _cursoRepository.Add(curso);
 
                 await _cursoRepository.SaveChangesAsync();
             }
@@ -75,21 +74,21 @@ namespace Business
             }
         }
 
-        public async Task Put(int id, CursoModelView CursoModelView)
+        public async Task Put(int id, CursoModelView cursoModelView)
         {
             try
             {
-                var Curso = await _cursoRepository.GetAsNoTrackingAsync(x => x.Id == id);
+                var curso = await _cursoRepository.GetAsNoTrackingAsync(x => x.Id == id);
 
-                if (Curso == null)
+                if (curso == null)
                 {
                     Mensagem = "Curso não encontrado";
                     return;
                 }
 
-                Map(ref Curso, CursoModelView);
+                Map(ref curso, cursoModelView);
 
-                _cursoRepository.Update(Curso);
+                _cursoRepository.Update(curso);
 
                 await _cursoRepository.SaveChangesAsync();
             }
@@ -104,15 +103,15 @@ namespace Business
         {
             try
             {
-                var Curso = await _cursoRepository.GetAsNoTrackingAsync(x => x.Id == id);
+                var curso = await _cursoRepository.GetAsNoTrackingAsync(x => x.Id == id);
 
-                if (Curso == null)
+                if (curso == null)
                 {
                     Mensagem = "Curso não encontrado";
                     return;
                 }
 
-                _cursoRepository.Delete(Curso);
+                _cursoRepository.Delete(curso);
 
                 await _cursoRepository.SaveChangesAsync();
             }
@@ -125,27 +124,56 @@ namespace Business
 
         #region Map
 
-        private static CursoModelView Map(Curso Curso)
+        private static CursoModelView Map(Curso curso) => new()
         {
-            return new CursoModelView
+            Id = curso.Id,
+            Descricao = curso.Nome,
+            Usuario = new UsuarioModelView
             {
-                Id = Curso.Id
-            };
-        }
+                Nome = curso.Usuario.Nome,
+            },
+            Categoria = new CategoriaCursoModelView
+            {
+                Id = curso.CategoriaCurso.Id,
+                Descricao = curso.CategoriaCurso.Nome,
+                Avatar = curso.CategoriaCurso.Avatar != null ? Convert.ToBase64String(curso.CategoriaCurso.Avatar) : string.Empty
+            },
+            Informacoes = curso.Informacoes,
+            DuracaoMinutos = curso.ConteudoCurso.Sum(x => x.MinutosDuracao),
+            DataCriacao = curso.DataCriacao,
+            //PreRequisito = ,
+            Obrigatorio = curso.PreRequisitoObrigatorio != 0,
+            Avatar = curso.Avatar != null ? Convert.ToBase64String(curso.Avatar) : string.Empty,
+            Conteudo = curso.ConteudoCurso.OrderBy(x => x.NumeroOrdem).Select(i => new ConteudoCursoModelView
+            {
+                Id = i.Id, 
+                Descricao = i.Nome, 
+                Ordem = i.NumeroOrdem, 
+                Duracao = i.MinutosDuracao, 
+                Informacoes = i.Informacoes,
+                UrlVideo = i.UrlVideo
+            }).ToList()
+        };
 
-        private static Curso Map(CursoModelView CursoModelView)
+        private static Curso Map(CursoModelView cursoModelView)
         {
             return new Curso
             {
-                
+                Nome = cursoModelView.Descricao,
+                IdUsuario = cursoModelView.Usuario.Id,
+                IdCategoriaCurso = cursoModelView.Categoria.Id,
+                Informacoes = cursoModelView.Informacoes,
+                //IdPreRequisito = cursoModelView.PreRequisito.Id,
+                PreRequisitoObrigatorio = 0,
+                Avatar = cursoModelView.Avatar != null ? Convert.FromBase64String(cursoModelView.Avatar) : default,
+                Classificacao = cursoModelView.Classificacao,
+                DataCriacao = DateTime.Now
             };
         }
 
-        private static void Map(ref Curso Curso, CursoModelView CursoModelView)
+        private static void Map(ref Curso curso, CursoModelView cursoModelView)
         {
-            /*Curso.Nome = Curso.Nome! != CursoModelView.Nome! ? CursoModelView.Nome! : Curso.Nome!;
-            Curso.Senha = Curso.Senha! != Utils.GetHash(CursoModelView.Senha!) ? Utils.GetHash(CursoModelView.Senha!) : Curso.Senha!;
-            Curso.Email = Curso.Email! != CursoModelView.Email! ? CursoModelView.Email! : Curso.Email!;*/
+            //curso.Avatar = curso.Avatar! != Convert.FromBase64String(cursoModelView.Avatar) ? Convert.FromBase64String(cursoModelView.Avatar) : curso.Avatar!;
         }
 
         #endregion

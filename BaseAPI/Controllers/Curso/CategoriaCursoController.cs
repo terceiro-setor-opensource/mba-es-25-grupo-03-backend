@@ -54,11 +54,11 @@ namespace BaseAPI.Controllers
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post([FromBody] CategoriaCursoModelView categoriaCurso)
+        public async Task<IActionResult> Post(string descricao, IFormFile avatar)
         {
             try
             {
-                await _categoriaCursoBusiness.Post(categoriaCurso);
+                await _categoriaCursoBusiness.Post(descricao, avatar);
 
                 return Response(null, _categoriaCursoBusiness.Mensagem, true);
             }
@@ -72,11 +72,11 @@ namespace BaseAPI.Controllers
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post(int id, [FromBody] CategoriaCursoModelView categoriaCurso)
+        public async Task<IActionResult> Put(int id, string descricao, IFormFile avatar)
         {
             try
             {
-                await _categoriaCursoBusiness.Put(id, categoriaCurso);
+                await _categoriaCursoBusiness.Put(id, descricao, avatar);
 
                 return Response(null, _categoriaCursoBusiness.Mensagem, true);
             }
@@ -90,7 +90,7 @@ namespace BaseAPI.Controllers
         [ProducesResponseType(200, Type = typeof(CategoriaCursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {

@@ -18,15 +18,24 @@ namespace BaseAPI.Controllers
             _cursoBusiness = cursoBusiness;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="descricao"></param>
+        /// <param name="categoria"></param>
+        /// <param name="classificacao"></param>
+        /// <param name="duracaoMin"></param>
+        /// <param name="duracaoMax"></param>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<CursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? descricao, long categoria, int classificacao, int duracaoMin, int duracaoMax)
         {
             try
             {
-                return Response(await _cursoBusiness.List(), _cursoBusiness.Mensagem, false);
+                return Response(await _cursoBusiness.List(descricao, categoria, classificacao, duracaoMin, duracaoMax), _cursoBusiness.Mensagem, false);
             }
             catch (Exception)
             {
@@ -34,6 +43,11 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(CursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
@@ -50,11 +64,17 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="curso"></param>
+        /// <param name="avatar"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(CursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post([FromBody] CursoModelView curso)
+        public async Task<IActionResult> Post([FromForm] CursoModelView curso, IFormFile avatar)
         {
             try
             {
@@ -68,11 +88,17 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="curso"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType(200, Type = typeof(CursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post(int id, [FromBody] CursoModelView curso)
+        public async Task<IActionResult> Put(int id, [FromBody] CursoModelView curso)
         {
             try
             {
@@ -86,11 +112,16 @@ namespace BaseAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(200, Type = typeof(CursoModelView))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Post(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {

@@ -4,15 +4,18 @@ namespace Business.Model.ModelView
 {
     public class UsuarioModelView
     {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public long Id { get; set; }
 
         public string Nome { get; set; } = string.Empty;
 
-        public string Documento { get; set; } = string.Empty;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string? Documento { get; set; }
 
         [JsonIgnore]
         public string? Senha { get; set; }
 
-        public string Email { get; set; } = string.Empty;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string? Email { get; set; }
     }
 }

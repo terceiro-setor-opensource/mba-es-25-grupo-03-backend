@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -63,6 +64,18 @@ namespace Infra
             }
 
             return stringBuilder.ToString();
+        }
+
+        public static async Task<byte[]> ConvertIFormFileToByteArray(IFormFile file)
+        {
+            if (file == null || file.Length <= 0)
+            {
+                return await Task.FromResult(Array.Empty<byte>());
+            }
+
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
         }
     }
 }

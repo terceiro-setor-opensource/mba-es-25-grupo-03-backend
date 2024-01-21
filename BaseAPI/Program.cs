@@ -4,6 +4,8 @@ using Data.Core;
 using Data.Repository;
 using Data.Repository.Model;
 using Infra;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,7 +73,15 @@ app.Use((context, next) =>
 {
     context.Request.EnableBuffering();
     return next();
-});
+}); 
+
+app.UseExceptionHandler(a => a.Run(context =>
+{
+    IExceptionHandlerPathFeature exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+    Exception exception = exceptionHandlerPathFeature.Error;
+
+    return Task.CompletedTask;
+}));
 
 Swagger.Configure(app);
 
