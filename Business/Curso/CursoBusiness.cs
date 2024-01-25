@@ -15,11 +15,11 @@ namespace Business
             _cursoRepository = cursoRepository;
         }
 
-        public async Task<List<CursoModelView>?> List(string? descricao, long categoria = 0, int classificacao = 0, int duracaoMin = 0, int duracaoMax = 0)
+        public async Task<List<CursoModelView>?> List(string? descricao, long categoria, int ratingMin, int ratingMax, int duracaoMin, int duracaoMax)
         {
             try
             {
-                var listaCursos = await _cursoRepository.ListaCursos(descricao, categoria, classificacao, duracaoMin, duracaoMax);
+                var listaCursos = await _cursoRepository.ListaCursos(descricao, categoria, ratingMin, ratingMax, duracaoMin, duracaoMax);
 
                 if (listaCursos == null)
                 {
@@ -128,31 +128,20 @@ namespace Business
         {
             Id = curso.Id,
             Descricao = curso.Nome,
-            Usuario = new UsuarioModelView
+            Usuario = 
             {
                 Nome = curso.Usuario.Nome,
             },
-            Categoria = new CategoriaCursoModelView
+            Categoria = 
             {
                 Id = curso.CategoriaCurso.Id,
                 Descricao = curso.CategoriaCurso.Nome,
-                Avatar = curso.CategoriaCurso.Avatar != null ? Convert.ToBase64String(curso.CategoriaCurso.Avatar) : string.Empty
             },
-            Informacoes = curso.Informacoes,
+            Informacoes = curso.Informacoes ?? string.Empty,
             DuracaoMinutos = curso.ConteudoCurso.Sum(x => x.MinutosDuracao),
             DataCriacao = curso.DataCriacao,
-            //PreRequisito = ,
             Obrigatorio = curso.PreRequisitoObrigatorio != 0,
-            Avatar = curso.Avatar != null ? Convert.ToBase64String(curso.Avatar) : string.Empty,
-            Conteudo = curso.ConteudoCurso.OrderBy(x => x.NumeroOrdem).Select(i => new ConteudoCursoModelView
-            {
-                Id = i.Id, 
-                Descricao = i.Nome, 
-                Ordem = i.NumeroOrdem, 
-                Duracao = i.MinutosDuracao, 
-                Informacoes = i.Informacoes,
-                UrlVideo = i.UrlVideo
-            }).ToList()
+            Avatar = curso.Avatar != null ? Convert.ToBase64String(curso.Avatar) : string.Empty
         };
 
         private static Curso Map(CursoModelView cursoModelView)
@@ -163,7 +152,6 @@ namespace Business
                 IdUsuario = cursoModelView.Usuario.Id,
                 IdCategoriaCurso = cursoModelView.Categoria.Id,
                 Informacoes = cursoModelView.Informacoes,
-                //IdPreRequisito = cursoModelView.PreRequisito.Id,
                 PreRequisitoObrigatorio = 0,
                 Avatar = cursoModelView.Avatar != null ? Convert.FromBase64String(cursoModelView.Avatar) : default,
                 Classificacao = cursoModelView.Classificacao,

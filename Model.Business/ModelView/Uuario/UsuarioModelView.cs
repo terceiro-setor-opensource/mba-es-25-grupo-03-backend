@@ -12,7 +12,7 @@ namespace Business.Model.ModelView
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? Documento { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? Senha { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

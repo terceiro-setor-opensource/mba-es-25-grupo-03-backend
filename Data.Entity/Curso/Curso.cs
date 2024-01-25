@@ -27,7 +27,7 @@ namespace Data.Entity
         [Required]
         [MaxLength(1000)]
         [Column("DS_INFO_CURSO")]
-        public string Informacoes { get; set; } = string.Empty;
+        public string? Informacoes { get; set; } = string.Empty;
 
         [Column("ID_PRE_REQUISITO")]
         public int? IdPreRequisito { get; set; }
@@ -51,6 +51,6 @@ namespace Data.Entity
         [ForeignKey("IdCategoriaCurso")]
         public virtual CategoriaCurso CategoriaCurso { get; set; } = new CategoriaCurso();
 
-        public virtual ICollection<ConteudoCurso>? ConteudoCurso { get; set; }
+        public virtual ICollection<ConteudoCurso> ConteudoCurso { get; set; }
     }
 }

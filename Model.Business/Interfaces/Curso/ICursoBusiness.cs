@@ -4,7 +4,7 @@ namespace Business.Model
 {
     public interface ICursoBusiness : ICommonBusiness
     {
-        Task<List<CursoModelView>?> List(string? descricao, long categoria = 0, int classificacao = 0, int duracaoMin = 0, int duracaoMax = 0);
+        Task<List<CursoModelView>?> List(string? descricao, long categoria, int ratingMin, int ratingMax, int duracaoMin, int duracaoMax);
 
         Task<CursoModelView?> Get(int id);
 
