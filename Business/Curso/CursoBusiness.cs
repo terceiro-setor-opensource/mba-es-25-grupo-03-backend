@@ -15,11 +15,13 @@ namespace Business
             _cursoRepository = cursoRepository;
         }
 
-        public async Task<List<CursoModelView>?> List(string? descricao, long categoria, int ratingMin, int ratingMax, int duracaoMin, int duracaoMax)
+        public async Task<List<CursoModelView>?> List(string? descricao, string? categorias, int ratingMin, int ratingMax, int duracaoMin, int duracaoMax)
         {
             try
             {
-                var listaCursos = await _cursoRepository.ListaCursos(descricao, categoria, ratingMin, ratingMax, duracaoMin, duracaoMax);
+                var listaCategorias = categorias != null && categorias.Length > 0 ? categorias.Split(',').Select(x => Convert.ToInt64(x)).ToList() : null;
+
+                var listaCursos = await _cursoRepository.ListaCursos(descricao, listaCategorias, ratingMin, ratingMax, duracaoMin, duracaoMax);
 
                 if (listaCursos == null)
                 {

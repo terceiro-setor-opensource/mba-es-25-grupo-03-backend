@@ -29,7 +29,7 @@ namespace BaseAPI.Controllers
         /// 
         /// </summary>
         /// <param name="descricao"></param>
-        /// <param name="categoria"></param>
+        /// <param name="categorias"></param>
         /// <param name="ratingMin"></param>
         /// <param name="ratingMax"></param>
         /// <param name="duracaoMin"></param>
@@ -39,11 +39,11 @@ namespace BaseAPI.Controllers
         [ProducesResponseType(200, Type = typeof(List<CursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Get(string? descricao, long? categoria, int? ratingMin, int? ratingMax, int? duracaoMin, int? duracaoMax)
+        public async Task<IActionResult> Get(string? descricao, string? categorias, int? ratingMin, int? ratingMax, int? duracaoMin, int? duracaoMax)
         {
             try
             {
-                return Response(await _cursoBusiness.List(descricao, categoria ?? 0, ratingMin ?? 0, ratingMax ?? 5, duracaoMin ?? 0, duracaoMax ?? 999), _cursoBusiness.Mensagem, false);
+                return Response(await _cursoBusiness.List(descricao, categorias, ratingMin ?? 0, ratingMax ?? 5, duracaoMin ?? 0, duracaoMax ?? 999), _cursoBusiness.Mensagem, false);
             }
             catch (Exception)
             {
