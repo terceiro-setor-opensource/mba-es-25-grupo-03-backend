@@ -2,6 +2,7 @@
 using Business.Model.ModelView;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaseAPI.Controllers
 {
@@ -33,7 +34,7 @@ namespace BaseAPI.Controllers
         [ProducesResponseType(200, Type = typeof(List<ConteudoCursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Get(long idCurso)
+        public async Task<IActionResult> Get([Required] long idCurso)
         {
             try
             {
