@@ -35,11 +35,11 @@ namespace Data.Core
 
         #endregion
 
-        #region Mensagem
+        #region Notificacao
 
-        public DbSet<MensagemCurso> MensagemCurso { get; set; }
+        public DbSet<NotificacaoCurso> NotificacaoCurso { get; set; }
 
-        public DbSet<MensagemMatricula> MensagemMatricula { get; set; }
+        public DbSet<NotificacaoMatricula> NotificacaoMatricula { get; set; }
 
         #endregion
 

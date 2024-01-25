@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entity
 {
-    [Table("MENSAGEM_CURSO")]
-    public class MensagemCurso
+    [Table("NOTIFICACAO_CURSO")]
+    public class NotificacaoCurso
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID_MENSAGEM_CURSO")]
+        [Column("ID_NOTIFICACAO_CURSO")]
         public long Id { get; set; }
 
         [Required]
@@ -22,8 +22,8 @@ namespace Data.Entity
 
         [Required]
         [MaxLength(512)]
-        [Column("DS_MENSAGEM")]
-        public string Mensagem { get; set; } = string.Empty;
+        [Column("DS_NOTIFICACAO")]
+        public string Notificacao { get; set; } = string.Empty;
 
         [Column("DT_CRIACAO")]
         public DateTime DataCriacao { get; set; }

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entity
 {
-    [Table("MENSAGEM_MATRICULA")]
-    public class MensagemMatricula
+    [Table("NOTIFICACAO_MATRICULA")]
+    public class NotificacaoMatricula
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID_MENSAGEM_MATRICULA")]
+        [Column("ID_NOTIFICACAO_MATRICULA")]
         public long Id { get; set; }
 
         [Required]
@@ -16,8 +16,8 @@ namespace Data.Entity
         public long IdMatricula { get; set; }
 
         [Required]
-        [Column("ID_MENSAGEM_CURSO")]
-        public long IdMensagemCurso { get; set; }
+        [Column("ID_NOTIFICACAO_CURSO")]
+        public long IdNotificacaoCurso { get; set; }
 
         [Column("DT_CRIACAO")]
         public DateTime DataCriacao { get; set; }
@@ -29,7 +29,7 @@ namespace Data.Entity
         [ForeignKey("IdMatricula")]
         public virtual MatriculaCurso MatriculaCurso { get; set; } = new MatriculaCurso();
 
-        [ForeignKey("IdMensagemCurso")]
-        public virtual MensagemCurso MensagemCurso { get; set; } = new MensagemCurso();
+        [ForeignKey("IdNotificacaoCurso")]
+        public virtual NotificacaoCurso NotificacaoCurso { get; set; } = new NotificacaoCurso();
     }
 }

@@ -70,13 +70,13 @@ namespace Infra
                     Extensions = logo
                 });
 
-                options.SwaggerDoc("Mensagem", new OpenApiInfo
+                options.SwaggerDoc("Notificacao", new OpenApiInfo
                 {
                     Contact = contact,
-                    Description = "Mensagem",
+                    Description = "Notificacao",
                     License = licence,
                     TermsOfService = new Uri("https://www.google.com"),
-                    Title = "Mensagem",
+                    Title = "Notificacao",
                     Version = "V1",
                     Extensions = logo
                 });
@@ -136,7 +136,7 @@ namespace Infra
                 c.SwaggerEndpoint("none/swagger.json", "none");
                 c.SwaggerEndpoint("Login/swagger.json", "Login");
                 c.SwaggerEndpoint("Curso/swagger.json", "Curso");
-                c.SwaggerEndpoint("Mensagem/swagger.json", "Mensagem");
+                c.SwaggerEndpoint("Notificacao/swagger.json", "Notificacao");
                 c.SwaggerEndpoint("Usuario/swagger.json", "Usuario");
 
                 c.InjectStylesheet("custom.css");

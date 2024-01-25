@@ -30,10 +30,10 @@ builder.Services.AddScoped<IMatriculaCursoRepository, MatriculaCursoRepository>(
 
 #endregion
 
-#region Mensagem
+#region Notificacao
 
-builder.Services.AddScoped<IMensagemCursoRepository, MensagemCursoRepository>();
-builder.Services.AddScoped<IMensagemMatriculaRepository, MensagemMatriculaRepository>();
+builder.Services.AddScoped<INotificacaoCursoRepository, NotificacaoCursoRepository>();
+builder.Services.AddScoped<INotificacaoMatriculaRepository, NotificacaoMatriculaRepository>();
 
 #endregion
 
@@ -57,9 +57,9 @@ builder.Services.AddScoped<IConteudoCursoBusiness, ConteudoCursoBusiness>();
 
 #endregion
 
-#region Mensagem
+#region Notificacao
 
-builder.Services.AddScoped<IMensagemBusiness, MensagemBusiness>();
+builder.Services.AddScoped<INotificacaoBusiness, NotificacaoBusiness>();
 
 #endregion
 
