@@ -18,6 +18,8 @@ namespace Business.Model.ModelView
 
         public int DuracaoMinutos { get; set; }
 
+        public string DuracaoFormatada { get; set; } = string.Empty;
+
         public double Classificacao { get; set; }
 
         public DateTime DataCriacao { get; set; }

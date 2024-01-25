@@ -139,6 +139,7 @@ namespace Business
             },
             Informacoes = curso.Informacoes ?? string.Empty,
             DuracaoMinutos = curso.ConteudoCurso.Sum(x => x.DuracaoMinutos),
+            DuracaoFormatada = $"{(curso.ConteudoCurso.Sum(x => x.DuracaoMinutos) / 60).ToString().PadLeft(2, '0')}:{(curso.ConteudoCurso.Sum(x => x.DuracaoMinutos) % 60).ToString().PadLeft(2, '0')}",
             DataCriacao = curso.DataCriacao,
             Obrigatorio = curso.PreRequisitoObrigatorio != 0,
             Avatar = curso.Avatar != null ? Convert.ToBase64String(curso.Avatar) : string.Empty
