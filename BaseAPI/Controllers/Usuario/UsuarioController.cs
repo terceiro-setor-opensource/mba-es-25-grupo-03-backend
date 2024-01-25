@@ -11,7 +11,7 @@ namespace BaseAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [ApiExplorerSettings(GroupName = "Usuario")]
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     public class UsuarioController : ApiController
     {
         private readonly IUsuarioBusiness _usuarioBusiness;
