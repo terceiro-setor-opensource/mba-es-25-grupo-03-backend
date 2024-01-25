@@ -17,11 +17,11 @@ namespace Data.Repository
         {
             return await (from c in _context.Set<Curso>()
                           join co in _context.Set<ConteudoCurso>() on c.Id equals co.IdCurso
-                          where (string.IsNullOrWhiteSpace(descricao) || c.Nome.ToLower().Contains(descricao.ToLower()))
+                          where (string.IsNullOrWhiteSpace(descricao) || c.Descricao.ToLower().Contains(descricao.ToLower()))
                              && (categoria == 0 || c.IdCategoriaCurso == categoria)
                              && (c.Classificacao >= Convert.ToDouble(ratingMin) && c.Classificacao <= Convert.ToDouble(ratingMax))
-                             && (c.ConteudoCurso.Count > 0 && c.ConteudoCurso.Sum(x => x.MinutosDuracao) >= duracaoMin * 60)
-                             && (c.ConteudoCurso.Sum(x => x.MinutosDuracao) <= duracaoMax * 60)
+                             && (c.ConteudoCurso.Count > 0 && c.ConteudoCurso.Sum(x => x.DuracaoMinutos) >= duracaoMin * 60)
+                             && (c.ConteudoCurso.Sum(x => x.DuracaoMinutos) <= duracaoMax * 60)
                           select c)
                           .Distinct()
                           .Include(a => a.Usuario)

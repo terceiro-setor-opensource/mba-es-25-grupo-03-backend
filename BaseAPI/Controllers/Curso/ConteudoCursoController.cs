@@ -29,15 +29,15 @@ namespace BaseAPI.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet()]
         [ProducesResponseType(200, Type = typeof(List<ConteudoCursoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(long idCurso)
         {
             try
             {
-                return Response(await _conteudoCursoBusiness.List(), _conteudoCursoBusiness.Mensagem, false);
+                return Response(await _conteudoCursoBusiness.List(idCurso), _conteudoCursoBusiness.Mensagem, false);
             }
             catch (Exception)
             {

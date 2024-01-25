@@ -14,7 +14,7 @@ namespace Data.Entity
         [Required]
         [MaxLength(256)]
         [Column("DS_CURSO")]
-        public string Nome { get; set; } = string.Empty;
+        public string Descricao { get; set; } = string.Empty;
 
         [Required]
         [Column("ID_USUARIO")]

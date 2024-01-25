@@ -13,7 +13,9 @@ namespace Business.Model.ModelView
 
         public int Ordem { get; set; }
 
-        public short Duracao { get; set; }
+        public short DuracaoMinutos { get; set; }
+
+        public string DuracaoFormatada { get; set; } = string.Empty;
 
         public string Informacoes { get; set; } = string.Empty;
 

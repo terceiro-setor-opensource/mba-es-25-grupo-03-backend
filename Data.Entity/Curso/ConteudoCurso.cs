@@ -18,7 +18,7 @@ namespace Data.Entity
         [Required]
         [MaxLength(256)]
         [Column("DS_CONTEUDO_CURSO")]
-        public string Nome { get; set; } = string.Empty;
+        public string Descricao { get; set; } = string.Empty;
 
         [Required]
         [Column("NU_CONTEUDO_CURSO")]
@@ -26,7 +26,7 @@ namespace Data.Entity
 
         [Required]
         [Column("NU_MINUTOS")]
-        public short MinutosDuracao { get; set; }
+        public short DuracaoMinutos { get; set; }
 
         [MaxLength(1000)]
         [Column("DS_INFO_CONTEUDO_CURSO")]

@@ -127,7 +127,7 @@ namespace Business
         private static CursoModelView Map(Curso curso) => new()
         {
             Id = curso.Id,
-            Descricao = curso.Nome,
+            Descricao = curso.Descricao,
             Usuario = 
             {
                 Nome = curso.Usuario.Nome,
@@ -138,7 +138,7 @@ namespace Business
                 Descricao = curso.CategoriaCurso.Nome,
             },
             Informacoes = curso.Informacoes ?? string.Empty,
-            DuracaoMinutos = curso.ConteudoCurso.Sum(x => x.MinutosDuracao),
+            DuracaoMinutos = curso.ConteudoCurso.Sum(x => x.DuracaoMinutos),
             DataCriacao = curso.DataCriacao,
             Obrigatorio = curso.PreRequisitoObrigatorio != 0,
             Avatar = curso.Avatar != null ? Convert.ToBase64String(curso.Avatar) : string.Empty
@@ -148,7 +148,7 @@ namespace Business
         {
             return new Curso
             {
-                Nome = cursoModelView.Descricao,
+                Descricao = cursoModelView.Descricao,
                 IdUsuario = cursoModelView.Usuario.Id,
                 IdCategoriaCurso = cursoModelView.Categoria.Id,
                 Informacoes = cursoModelView.Informacoes,

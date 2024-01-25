@@ -16,11 +16,11 @@ namespace Business
             _conteudoCursoRepository = conteudoCursoRepository;
         }
 
-        public async Task<List<ConteudoCursoModelView>?> List()
+        public async Task<List<ConteudoCursoModelView>?> List(long idCurso)
         {
             try
             {
-                var listaConteudoCurso = await _conteudoCursoRepository.ListAsNoTrackingAsync();
+                var listaConteudoCurso = await _conteudoCursoRepository.ListAsNoTrackingAsync(x => x.IdCurso == idCurso);
 
                 if (listaConteudoCurso == null)
                 {
@@ -28,7 +28,7 @@ namespace Business
                     return await Task.FromResult<List<ConteudoCursoModelView>?>(null);
                 }
 
-                return listaConteudoCurso.Select(Map).ToList();
+                return listaConteudoCurso.Select(Map).OrderBy(x => x.Ordem).ToList();
             }
             catch
             {
@@ -129,7 +129,13 @@ namespace Business
         {
             return new ConteudoCursoModelView
             {
-                Id = conteudoCurso.Id
+                Id = conteudoCurso.Id,
+                Descricao = conteudoCurso.Descricao,
+                Ordem = conteudoCurso.NumeroOrdem,
+                DuracaoMinutos = conteudoCurso.DuracaoMinutos,
+                DuracaoFormatada = $"{(conteudoCurso.DuracaoMinutos / 60).ToString().PadLeft(2, '0')}:{(conteudoCurso.DuracaoMinutos % 60).ToString().PadLeft(2, '0')}",
+                Informacoes = conteudoCurso.Informacoes,
+                UrlVideo = conteudoCurso.UrlVideo
             };
         }
 

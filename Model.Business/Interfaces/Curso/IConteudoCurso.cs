@@ -4,7 +4,7 @@ namespace Business.Model
 {
     public interface IConteudoCursoBusiness : ICommonBusiness
     {
-        Task<List<ConteudoCursoModelView>?> List();
+        Task<List<ConteudoCursoModelView>?> List(long idCurso);
 
         Task<ConteudoCursoModelView?> Get(int id);
 
