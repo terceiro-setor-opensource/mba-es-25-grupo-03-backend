@@ -30,7 +30,9 @@ namespace Data.Repository
                              Titulo = nc.Titulo, 
                              Notificacao = nc.Notificacao, 
                              DataCriacao = nc.DataCriacao, 
-                             Lida = nm.Lida == 1
+                             Lida = nm.Lida == 1, 
+                             Icone = nc.Icone ?? string.Empty,
+                             Cor = nc.Cor ?? string.Empty
                          };
 
             return await query.OrderBy(x => x.DataCriacao).ToListAsync();
