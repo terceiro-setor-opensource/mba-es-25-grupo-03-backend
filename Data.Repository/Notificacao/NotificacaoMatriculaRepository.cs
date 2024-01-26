@@ -35,7 +35,7 @@ namespace Data.Repository
                              Cor = nc.Cor ?? string.Empty
                          };
 
-            return await query.OrderBy(x => x.DataCriacao).ToListAsync();
+            return await query.OrderByDescending(x => x.DataCriacao).ToListAsync();
         }
     }
 }
