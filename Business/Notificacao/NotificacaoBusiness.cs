@@ -42,7 +42,7 @@ namespace Business
 
                 if (mensagem == null)
                 {
-                    Mensagem = "Notificação não encontrados";
+                    Mensagem = "Notificação não encontrada";
                     return;
                 }
 
