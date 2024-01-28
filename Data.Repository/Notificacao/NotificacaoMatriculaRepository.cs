@@ -33,7 +33,8 @@ namespace Data.Repository
                              Lida = nm.Lida == 1, 
                              Icone = nc.Icone ?? string.Empty,
                              Cor = nc.Cor ?? string.Empty
-                         };
+                         })
+                         .AsNoTracking();
 
             return await query.OrderByDescending(x => x.DataCriacao).ToListAsync();
         }
