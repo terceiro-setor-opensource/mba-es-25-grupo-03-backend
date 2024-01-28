@@ -1,6 +1,4 @@
-﻿using Business.Model.ModelView;
-
-namespace Business.Model
+﻿namespace Business.Model
 {
     public interface ILoginBusiness : ICommonBusiness
     {

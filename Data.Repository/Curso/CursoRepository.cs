@@ -15,7 +15,7 @@ namespace Data.Repository
 
         public async Task<List<Curso>?> ListaCursos(string? descricao, List<long>? categorias, int ratingMin, int ratingMax, int duracaoMin, int duracaoMax)
         {
-            return await (from c in _context.Set<Curso>()
+            return await (from c in Entity()
                           join co in _context.Set<ConteudoCurso>() on c.Id equals co.IdCurso
                           where (string.IsNullOrWhiteSpace(descricao) || c.Descricao.ToLower().Contains(descricao.ToLower()))
                              && (categorias == null || categorias.Count == 0 || categorias.Contains(c.IdCategoriaCurso))
@@ -32,7 +32,7 @@ namespace Data.Repository
 
         public async Task<Curso?> GetCurso(long id)
         {
-            return await (from c in _context.Set<Curso>()
+            return await (from c in Entity()
                           join co in _context.Set<ConteudoCurso>() on c.Id equals co.IdCurso
                           where c.Id == id
                           select c)

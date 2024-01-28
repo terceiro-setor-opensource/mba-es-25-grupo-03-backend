@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Business.Model.ModelView
+﻿namespace Business.Model.ModelView
 {
     public class CursoModelView
     {

@@ -1,7 +1,7 @@
 ﻿using Business.Model;
-using Business.Model.ModelView;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaseAPI.Controllers
 {
@@ -30,11 +30,11 @@ namespace BaseAPI.Controllers
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <returns></returns>
-        [HttpGet("idUsuario")]
+        [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<NotificacaoModelView>))]
         [ProducesResponseType(400, Type = typeof(ReponseModelView))]
         [ProducesResponseType(404, Type = typeof(ReponseModelView))]
-        public async Task<IActionResult> Get(long idUsuario)
+        public async Task<IActionResult> Get([Required] long idUsuario)
         {
             try
             {

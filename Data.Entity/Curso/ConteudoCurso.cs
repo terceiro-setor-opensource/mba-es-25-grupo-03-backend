@@ -22,7 +22,7 @@ namespace Data.Entity
 
         [Required]
         [Column("NU_CONTEUDO_CURSO")]
-        public int NumeroOrdem { get; set; }
+        public short NumeroOrdem { get; set; }
 
         [Required]
         [Column("NU_MINUTOS")]

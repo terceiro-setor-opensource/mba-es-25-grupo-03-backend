@@ -33,7 +33,7 @@ namespace Business
             }
             catch
             {
-                Mensagem = "Erro ao carregar lista de Cursos";
+                Mensagem = "Erro ao carregar lista de cursos";
                 throw;
             }
         }
@@ -54,7 +54,7 @@ namespace Business
             }
             catch
             {
-                Mensagem = "Erro ao carregar Curso";
+                Mensagem = "Erro ao carregar curso";
                 throw;
             }
         }
@@ -71,7 +71,7 @@ namespace Business
             }
             catch
             {
-                Mensagem = "Erro ao criar Curso";
+                Mensagem = "Erro ao criar curso";
                 throw;
             }
         }
@@ -96,7 +96,7 @@ namespace Business
             }
             catch
             {
-                Mensagem = "Erro ao alterar Curso";
+                Mensagem = "Erro ao alterar curso";
                 throw;
             }
         }
@@ -119,7 +119,7 @@ namespace Business
             }
             catch
             {
-                Mensagem = "Erro ao excluir Curso";
+                Mensagem = "Erro ao excluir curso";
                 throw;
             }
         }
