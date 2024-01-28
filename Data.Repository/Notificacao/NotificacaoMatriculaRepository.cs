@@ -30,9 +30,10 @@ namespace Data.Repository
                              Titulo = nc.Titulo, 
                              Notificacao = nc.Notificacao, 
                              DataCriacao = nc.DataCriacao, 
-                             Lida = nm.Lida == 1
-                         })
-                         .AsNoTracking();
+                             Lida = nm.Lida == 1, 
+                             Icone = nc.Icone ?? string.Empty,
+                             Cor = nc.Cor ?? string.Empty
+                         };
 
             return await query.OrderByDescending(x => x.DataCriacao).ToListAsync();
         }

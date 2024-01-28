@@ -28,6 +28,12 @@ namespace Data.Entity
         [Column("DT_CRIACAO")]
         public DateTime DataCriacao { get; set; }
 
+        [Column("DS_ICON")]
+        public string? Icone { get; set; }
+
+        [Column("DS_COLOR")]
+        public string? Cor { get; set; }
+
 
         [ForeignKey("IdCurso")]
         public virtual Curso Curso { get; set; } = new Curso();
