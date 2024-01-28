@@ -37,6 +37,12 @@ builder.Services.AddScoped<INotificacaoMatriculaRepository, NotificacaoMatricula
 
 #endregion
 
+#region Mensagem
+
+builder.Services.AddScoped<IMensagemRepository, MensagemRepository>();
+
+#endregion
+
 #endregion
 
 #region Business
@@ -60,6 +66,12 @@ builder.Services.AddScoped<IConteudoCursoBusiness, ConteudoCursoBusiness>();
 #region Notificacao
 
 builder.Services.AddScoped<INotificacaoBusiness, NotificacaoBusiness>();
+
+#endregion
+
+#region Mensagem
+
+builder.Services.AddScoped<IMensagemBusiness, MensagemBusiness>();
 
 #endregion
 

@@ -43,6 +43,12 @@ namespace Data.Core
 
         #endregion
 
+        #region Mensagem
+
+        public DbSet<Mensagem> Mensagem { get; set; }
+
+        #endregion
+
         #endregion
     }
 }
