@@ -23,6 +23,8 @@ namespace Data.Repository
                          select new MatriculaModelView
                          {
                              IdMatricula = mc.Id,
+                             IdCurso = c.Id, 
+                             IdUsuario = idUsuario,
                              Curso = c.Descricao,
                              NomeInstrutor = i.Nome
                          })

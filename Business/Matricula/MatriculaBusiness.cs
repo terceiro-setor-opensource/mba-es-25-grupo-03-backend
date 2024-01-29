@@ -1,7 +1,9 @@
 ﻿using Business.Core;
 using Business.Model;
 using Business.Model.ModelView;
+using Data.Entity;
 using Data.Repository.Model;
+using System.Data.SqlTypes;
 
 namespace Business
 {
@@ -34,5 +36,35 @@ namespace Business
                 throw;
             }
         }
+
+        public async Task Add(MatriculaModelView matriculaModelView)
+        {
+            try
+            {
+                var matricula = Map(matriculaModelView);
+
+                _matriculaCursoRepository.Add(matricula);
+
+                await _matriculaCursoRepository.SaveChangesAsync();
+            }
+            catch
+            {
+                Mensagem = "Erro ao responder mensagem";
+                throw;
+            }
+        }
+
+        #region Map
+
+        private static MatriculaCurso Map(MatriculaModelView mensagemModelView)
+        {
+            return new MatriculaCurso
+            {
+                IdUsuario = mensagemModelView.IdUsuario, 
+                IdCurso = mensagemModelView.IdCurso
+            };
+        }
+
+        #endregion
     }
 }

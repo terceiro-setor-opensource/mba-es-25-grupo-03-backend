@@ -50,7 +50,6 @@ namespace BaseAPI.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(ReponseModelView))]

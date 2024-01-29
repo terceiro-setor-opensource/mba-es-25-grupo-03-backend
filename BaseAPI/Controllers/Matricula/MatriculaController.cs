@@ -1,5 +1,5 @@
-﻿using Business.Model.ModelView;
-using Business.Model;
+﻿using Business.Model;
+using Business.Model.ModelView;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -40,6 +40,28 @@ namespace BaseAPI.Controllers
             try
             {
                 return Response(await _matriculaBusiness.List(idUsuario), _matriculaBusiness.Mensagem, false);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, null);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(200, Type = typeof(ReponseModelView))]
+        [ProducesResponseType(400, Type = typeof(ReponseModelView))]
+        [ProducesResponseType(404, Type = typeof(ReponseModelView))]
+        public async Task<IActionResult> Post(MatriculaModelView matriculaModelView)
+        {
+            try
+            {
+                await _matriculaBusiness.Add(matriculaModelView);
+
+                return Response(null, _matriculaBusiness.Mensagem, false);
             }
             catch (Exception)
             {
