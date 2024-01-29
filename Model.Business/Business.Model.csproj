@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Data.Entity\Data.Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ModelView\Matricula\" />
-  </ItemGroup>
-
 </Project>
