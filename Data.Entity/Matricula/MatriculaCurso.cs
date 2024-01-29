@@ -18,12 +18,5 @@ namespace Data.Entity
         [Required]
         [Column("ID_CURSO")]
         public long IdCurso { get; set; }
-
-
-        [ForeignKey("IdUsuario")]
-        public virtual Usuario Usuario { get; set; } = new Usuario();
-
-        [ForeignKey("IdCurso")]
-        public virtual Curso Curso { get; set; } = new Curso();
     }
 }

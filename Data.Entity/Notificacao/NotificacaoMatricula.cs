@@ -19,17 +19,7 @@ namespace Data.Entity
         [Column("ID_NOTIFICACAO_CURSO")]
         public long IdNotificacaoCurso { get; set; }
 
-        [Column("DT_CRIACAO")]
-        public DateTime DataCriacao { get; set; }
-
         [Column("IN_LIDA")]
         public short Lida { get; set; }
-
-
-        [ForeignKey("IdMatricula")]
-        public virtual MatriculaCurso MatriculaCurso { get; set; } = new MatriculaCurso();
-
-        [ForeignKey("IdNotificacaoCurso")]
-        public virtual NotificacaoCurso NotificacaoCurso { get; set; } = new NotificacaoCurso();
     }
 }

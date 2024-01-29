@@ -3,7 +3,6 @@ using Business.Model;
 using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
-using System.Data.SqlTypes;
 
 namespace Business
 {
@@ -81,7 +80,6 @@ namespace Business
             {
                 IdMatriculaCurso = mensagemModelView.IdMatricula,                
                 Texto = mensagemModelView.Mensagem,
-                DataEnvio = SqlDateTime.MinValue.Value,
                 Instrutor = 0,
                 Lida = 0
             };

@@ -3,17 +3,22 @@ using Business.Model;
 using Business.Model.ModelView;
 using Data.Entity;
 using Data.Repository.Model;
-using System.Data.SqlTypes;
 
 namespace Business
 {
     public class MatriculaBusiness : CommonBusiness, IMatriculaCursoBusiness
     {
         private readonly IMatriculaCursoRepository _matriculaCursoRepository;
+        private readonly INotificacaoCursoRepository _notificacaoCursoRepository;
+        private readonly INotificacaoMatriculaRepository _notificacaoMatriculaRepository;
 
-        public MatriculaBusiness(IMatriculaCursoRepository matriculaCursoRepository)
+        public MatriculaBusiness(IMatriculaCursoRepository matriculaCursoRepository,
+                                 INotificacaoCursoRepository notificacaoCursoRepository,
+                                 INotificacaoMatriculaRepository notificacaoMatriculaRepository)
         {
             _matriculaCursoRepository = matriculaCursoRepository;
+            _notificacaoCursoRepository = notificacaoCursoRepository;
+            _notificacaoMatriculaRepository = notificacaoMatriculaRepository;
         }
 
         public async Task<List<MatriculaModelView>?> List(long idUsuario)
@@ -39,16 +44,40 @@ namespace Business
 
         public async Task Add(MatriculaModelView matriculaModelView)
         {
+            var listaNotificacoesPorCurso = await _notificacaoCursoRepository.ListAsNoTrackingAsync(x => x.IdCurso == matriculaModelView.IdCurso);
+
             try
             {
                 var matricula = Map(matriculaModelView);
 
+                _matriculaCursoRepository.BeginTransaction();
+
                 _matriculaCursoRepository.Add(matricula);
 
                 await _matriculaCursoRepository.SaveChangesAsync();
+
+                _notificacaoMatriculaRepository.Add(new NotificacaoMatricula
+                {
+                    IdMatricula = matricula.Id,
+                    IdNotificacaoCurso = listaNotificacoesPorCurso.First(x => x.Icone == "sell").Id,
+                    Lida = 0
+                });
+
+                _notificacaoMatriculaRepository.Add(new NotificacaoMatricula
+                {
+                    IdMatricula = matricula.Id,
+                    IdNotificacaoCurso = listaNotificacoesPorCurso.First(x => x.Icone == "group").Id,
+                    Lida = 0
+                });
+
+                await _notificacaoMatriculaRepository.SaveChangesAsync();
+
+                _matriculaCursoRepository.Commit();
             }
-            catch
+            catch (Exception ex) 
             {
+                _matriculaCursoRepository.Rollback();
+
                 Mensagem = "Erro ao responder mensagem";
                 throw;
             }
@@ -60,7 +89,7 @@ namespace Business
         {
             return new MatriculaCurso
             {
-                IdUsuario = mensagemModelView.IdUsuario, 
+                IdUsuario = mensagemModelView.IdUsuario,
                 IdCurso = mensagemModelView.IdCurso
             };
         }

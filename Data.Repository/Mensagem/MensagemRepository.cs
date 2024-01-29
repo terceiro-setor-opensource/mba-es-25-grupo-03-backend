@@ -25,16 +25,16 @@ namespace Data.Repository
                          select new MensagemModelView
                          {
                              IdMatricula = mc.Id,
+                             IdMensagem = m.Id,
                              Curso = c.Descricao,
                              NomeInstrutor = i.Nome,
                              Mensagem = m.Texto,
-                             DataEnvio = m.DataEnvio.Value,
                              Instrutor = m.Instrutor == 1,
                              Lida = m.Lida == 1
                          })
                          .AsNoTracking();
 
-            return await query.OrderBy(x => x.DataEnvio).ToListAsync();
+            return await query.OrderBy(x => x.IdMensagem).ToListAsync();
         }
     }
 }

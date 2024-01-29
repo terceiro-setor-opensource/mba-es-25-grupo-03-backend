@@ -20,10 +20,6 @@ namespace Data.Entity
         [Column("DS_MENSAGEM")]
         public string Texto { get; set; } = string.Empty;
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DT_ENVIO")]
-        public DateTime? DataEnvio { get; set; }
-
         [Column("IN_INSTRUTOR")]
         public short Instrutor { get; set; }
 
