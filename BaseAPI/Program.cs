@@ -69,6 +69,12 @@ builder.Services.AddScoped<INotificacaoBusiness, NotificacaoBusiness>();
 
 #endregion
 
+#region Matricula
+
+builder.Services.AddScoped<IMatriculaCursoBusiness, MatriculaBusiness>();
+
+#endregion
+
 #region Mensagem
 
 builder.Services.AddScoped<IMensagemBusiness, MensagemBusiness>();
