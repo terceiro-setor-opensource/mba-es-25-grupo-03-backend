@@ -31,19 +31,7 @@ namespace Data.Core
 
         public DbSet<ConteudoCurso> ConteudoCurso { get; set; }
 
-        #endregion
-
-        #region Matricula
-
         public DbSet<MatriculaCurso> MatriculaCurso { get; set; }
-
-        public DbSet<HistoricoMatriculaConteudo> HistoricoMatriculaConteudo { get; set; }        
-
-        #endregion
-
-        #region Mensagem
-
-        public DbSet<Mensagem> Mensagem { get; set; }
 
         #endregion
 
@@ -52,6 +40,12 @@ namespace Data.Core
         public DbSet<NotificacaoCurso> NotificacaoCurso { get; set; }
 
         public DbSet<NotificacaoMatricula> NotificacaoMatricula { get; set; }
+
+        #endregion
+
+        #region Mensagem
+
+        public DbSet<Mensagem> Mensagem { get; set; }
 
         #endregion
 

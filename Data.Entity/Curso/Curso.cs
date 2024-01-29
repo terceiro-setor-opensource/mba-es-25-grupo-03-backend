@@ -51,6 +51,6 @@ namespace Data.Entity
         [ForeignKey("IdCategoriaCurso")]
         public virtual CategoriaCurso CategoriaCurso { get; set; } = new CategoriaCurso();
 
-        public virtual List<ConteudoCurso>? ConteudoCurso { get; set; } = new List<ConteudoCurso>();
+        public virtual ICollection<ConteudoCurso> ConteudoCurso { get; set; }
     }
 }
